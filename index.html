@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Little Question ❤️</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:linear-gradient(135deg,#fff0f5,#ffe4ec);color:#3b2630;overflow:hidden}
+.hearts span{position:fixed;bottom:-30px;font-size:22px;animation:float 7s linear infinite;opacity:.55;pointer-events:none}
+.hearts span:nth-child(1){left:8%}.hearts span:nth-child(2){left:25%;animation-delay:2s}.hearts span:nth-child(3){left:48%;animation-delay:4s}.hearts span:nth-child(4){left:70%;animation-delay:1s}.hearts span:nth-child(5){left:88%;animation-delay:3s}
+@keyframes float{to{transform:translateY(-115vh) rotate(20deg);opacity:0}}
+.card{width:min(92vw,560px);padding:48px 30px;text-align:center;background:rgba(255,255,255,.84);border-radius:28px;box-shadow:0 20px 60px rgba(116,49,72,.15);backdrop-filter:blur(10px);animation:appear .7s ease;position:relative;z-index:2}
+@keyframes appear{from{opacity:0;transform:translateY(15px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+.emoji{font-size:48px;margin-bottom:8px}
+h1{margin:0 0 14px;font-size:clamp(30px,7vw,46px)}
+p{font-size:19px;line-height:1.6;margin:10px 0 26px}
+.buttons{position:relative;height:90px;display:flex;justify-content:center;align-items:center;gap:16px}
+button,.whatsapp{border:0;border-radius:999px;padding:14px 27px;font-size:17px;font-weight:700;cursor:pointer;text-decoration:none;display:inline-block;transition:transform .18s ease,box-shadow .18s ease}
+#yes{background:#ff5c8a;color:white;box-shadow:0 8px 20px rgba(255,92,138,.28)}
+#yes:hover{transform:scale(1.06)}
+#no{background:#eee;color:#555;position:relative}
+.whatsapp{background:#25D366;color:white;box-shadow:0 8px 20px rgba(37,211,102,.22)}
+.whatsapp:hover{transform:scale(1.04)}
+.hidden{display:none}
+.success h1{color:#ff4f82}
+.success .big{font-size:54px;margin-bottom:8px}
+.tiny{font-size:14px;opacity:.65;margin-top:24px}
+.note{font-size:14px;opacity:.7;margin-top:18px}
+</style>
+</head>
+<body>
+<div class="hearts"><span>❤️</span><span>♡</span><span>💕</span><span>❤️</span><span>💗</span></div>
+
+<main class="card" id="question">
+<div class="emoji">Missed Connections✈️</div>
+<h1>Dear Ms. Jia (IX-1231 27D), this is your captain speaking...</h1>
+<p>I have a rather unusual announcement to make. The crew has completed all routine checks, and there is now one important question remaining:</p>
+<p><strong>Would you like to go out with me? </strong></p>
+<div class="buttons">
+<button id="yes">YES </button>
+<button id="no">NO </button>
+</div>
+<div class="tiny">Choose wisely...XD</div>
+</main>
+
+<main class="card success hidden" id="success">
+<div class="big">Finally!</div>
+<h1>Please Remain Seated. This is your captain speaking again.</h1>
+<p>I genuinely wasn't prepared for you to say Yes. But hey, it's a date! </p> 
+<p>Now, according to highly questionable airline regulations, there's just one tiny thing remaining...</p>
+<a id="whatsapp" class="whatsapp" href="#" target="_blank" rel="noopener">Tell me you said YES 📧</a>
+<div class="note"> </div>
+</main>
+
+<script>
+/* Replace with YOUR WhatsApp number, international format, no + or spaces.
+   Example India: 917654870722 */
+const YOUR_WHATSAPP_NUMBER = "YOUR_NUMBER_HERE";
+
+const yes=document.getElementById("yes");
+const no=document.getElementById("no");
+const question=document.getElementById("question");
+const success=document.getElementById("success");
+const whatsapp=document.getElementById("whatsapp");
+
+yes.addEventListener("click",()=>{
+  question.classList.add("hidden");
+  success.classList.remove("hidden");
+  const message="Okay... I said YES. I guess it's officially a date!";
+  whatsapp.href="https://wa.me/"+917654870722+"?text="+encodeURIComponent(message);
+});
+
+function escapeNo(){
+  const padding=25;
+  const maxX=Math.max(80,window.innerWidth-180);
+  const maxY=Math.max(80,window.innerHeight-100);
+  no.style.position="fixed";
+  no.style.left=(Math.random()*(maxX-padding)+padding)+"px";
+  no.style.top=(Math.random()*(maxY-padding)+padding)+"px";
+  no.style.zIndex="10";
+}
+no.addEventListener("mouseenter",escapeNo);
+no.addEventListener("touchstart",e=>{e.preventDefault();escapeNo()});
+no.addEventListener("click",escapeNo);
+</script>
+</body>
+</html>
